@@ -1,0 +1,16 @@
+<h1>Outside Job Board</h1>
+
+<ul>
+
+    <%= @jobs.each do |j| %>
+        <li><%= j.title %></li>
+
+        <%= link_to "詳細資訊", job_path(j) %>
+        <%= link_to "編輯", edit_job_path(j) %>
+        <%= link_to "刪除", job_path(j), :method => :delete %>
+
+    <% end %>
+
+</ul>
+
+<%= link_to "張貼新的職缺", new_job_path %>
