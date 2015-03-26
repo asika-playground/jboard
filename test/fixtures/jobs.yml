@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  company: MyString
+  min_salary: 1
+  location: MyString
+  url: MyString
+  description: MyText
+  expire: 2015-03-26
+
+two:
+  title: MyString
+  company: MyString
+  min_salary: 1
+  location: MyString
+  url: MyString
+  description: MyText
+  expire: 2015-03-26
