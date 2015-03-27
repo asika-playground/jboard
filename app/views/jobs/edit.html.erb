@@ -1,0 +1,36 @@
+<h1>Edit Job Data</h1>
+
+<%= form_for @job, :url => job_path(@job) do |f| %>
+
+    <% if @job.errors.any? %>
+          <ul>
+          <% @job.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+    <% end %>
+
+    <%= f.label :title, "Job Title*" %>
+    <%= f.text_field :title %>
+
+    <%= f.label :company, "Company*" %>
+    <%= f.text_field :company %>
+
+    <%= f.label :location, "Location*" %>
+    <%= f.text_field :location %>
+
+    <%= f.label :min_salary, "Min. Salary*" %>
+    <%= f.number_field :min_salary %>
+
+    <%= f.label :expire, "Expire Date" %>
+    <%= f.date_field :expire %>
+
+    <%= f.label :url, "Job URL" %>
+    <%= f.text_field :url %>
+
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
+
+    <%= f.submit "Update" %>
+
+<% end %>

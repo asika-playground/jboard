@@ -1,7 +1,9 @@
 class JobsController < ApplicationController
 
+    before_action :set_job, :only => [ :show, :edit, :update, :destroy]
+
     def index
-        @jobs = Job.all
+        @jobs = Job.page(params[:page]).per(5)
     end
 
     def new
@@ -12,6 +14,8 @@ class JobsController < ApplicationController
         @job = Job.new(job_params)
 
         if @job.save
+            flash[:notice] = "Job created successfully."
+
             redirect_to jobs_path
         else
             render :action => :new
@@ -22,9 +26,27 @@ class JobsController < ApplicationController
     end
 
     def destroy
+        @job.destroy
+
+        flash[:alert] = "Job deleted successfully."
+        redirect_to jobs_path
     end
 
     def edit
+    end
+
+    def update
+        if @job.update(job_params)
+            flash[:notice] = "Job updated successfully."
+
+            redirect_to jobs_path
+        else
+            render :action => :edit
+        end
+    end
+
+    def set_job
+        @job = Job.find(params[:id])
     end
 
     def job_params

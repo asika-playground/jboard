@@ -1,1 +1,13 @@
 <h1>Job Details</h1>
+
+<ul>
+    <li>Title: <%= @job.title %></li>
+    <li>Company: <%= @job.company %></li>
+    <li>Location: <%= @job.location %></li>
+    <li>Min. Salary: <%= @job.min_salary %></li>
+    <li>URL: <%= @job.url %></li>
+    <li>Description: <%= @job.description %></li>
+    <li>Expires: <%= @job.expire %></li>
+</ul>
+
+<%= link_to "Back to Index", jobs_path %>
