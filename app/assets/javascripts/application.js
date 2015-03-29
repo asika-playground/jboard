@@ -15,3 +15,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+toggle_edit_panel = function (id) {
+    $("#edit"+id).toggle();
+}
+
+// $(".editarea").toggle();
+// $(".active").show();

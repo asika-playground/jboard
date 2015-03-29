@@ -4,6 +4,8 @@ class JobsController < ApplicationController
 
     def index
         @jobs = Job.page(params[:page]).per(5)
+
+        @job = Job.new
     end
 
     def new
@@ -18,6 +20,8 @@ class JobsController < ApplicationController
 
             redirect_to jobs_path
         else
+            @jobs = Job.page(params[:page]).per(5)
+
             render :action => :new
         end
     end
@@ -33,6 +37,7 @@ class JobsController < ApplicationController
     end
 
     def edit
+        @jobs = Job.page(params[:page]).per(5)
     end
 
     def update
@@ -41,6 +46,8 @@ class JobsController < ApplicationController
 
             redirect_to jobs_path
         else
+            @jobs = Job.page(params[:page]).per(5)
+
             render :action => :edit
         end
     end

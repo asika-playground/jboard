@@ -6,3 +6,14 @@
     width: 90%;
     margin: auto;
 }
+
+.close_panel {
+    display: none;
+}
+
+#new_panel,
+#edit_panel {
+    background-color: #eee;
+    padding: 1% 5% 1% 5%;
+    margin-bottom: 30px;
+}

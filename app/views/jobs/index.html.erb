@@ -1,8 +1,33 @@
 <h1>Outside Job Board</h1>
 
-<%= link_to new_job_path, :class => "btn btn-primary" do %>
-    <span class="glyphicon glyphicon-plus"></span>張貼新的職缺
+<% if false %>
+<%= debug(params) %>
 <% end %>
+
+<button class="btn btn-primary" onclick="$('#new_panel').toggle();">
+    <span class="glyphicon glyphicon-plus"></span>張貼新的職缺
+</button>
+
+<div id="new_panel" class="close_panel">
+    <h3>張貼新的職缺</h3>
+
+    <% if @job %>
+    <% if @job.errors.any? %>
+          <ul>
+          <% @job.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+    <% end %>
+    <% end %>
+
+    <%= form_for @job, :url => jobs_path(:page => params[:page]) do |f| %>
+
+        <%= render :partial => 'form', :locals => { :f => f } %>
+        <%= f.submit "Post", :class => "btn btn-primary" %>
+
+    <% end %>
+</div>
 
 <table class="table table-striped table-hover">
         <tr>
@@ -27,14 +52,51 @@
                 <%= link_to job_path(j), :class => "btn btn-primary" do %>
                     <span class="glyphicon glyphicon-info-sign"></span> 詳細資訊
                 <% end %>
-                <%= link_to edit_job_path(j), :class => "btn btn-default" do %>
+
+                <%= link_to edit_job_path(j, :page => params[:page]), :class => "btn btn-default" do %>
                     <span class="glyphicon glyphicon-pencil"></span> 編輯
                 <% end %>
+
+                <% if false %>
+                <button class="btn btn-default" id="button_edit<%= j.id %>" onclick="toggle_edit_panel(<%= j.id %>);">
+                    <span class="glyphicon glyphicon-pencil"></span> 編輯
+                </button>
+                <% end %>
+
                 <%= link_to job_path(j), :method => :delete, :data => { :confirm => "Are you sure to delete?" }, :class => "btn btn-danger" do %>
                     <span class="glyphicon glyphicon-remove"></span> 刪除
                 <% end %>
             </td>
         </tr>
+
+        <% if false %>
+        <tr class="<% if @editing != j.id.to_s %>editarea<% end %> <% if @editing == j.id.to_s %>active<% end %>" id="edit<%= j.id %>">
+            <td colspan="7">
+                <h3>Edit panel</h3>
+
+                <% if @job %>
+                <% if @job.errors.any? %>
+                      <ul>
+                      <% @job.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                      <% end %>
+                      </ul>
+                <% end %>
+                <% end %>
+
+                <%= form_for j, :url => job_path(j) do |f| %>
+                    <%= render :partial => 'form', :locals => { :f => f, :j => j } %>
+
+                    <%= f.hidden_field :page, :value => params[:page] %>
+                    <%= f.hidden_field :editing, :value => j.id %>
+
+                    <%= f.submit "Update", :class => "btn btn-primary" %>
+
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+
     <% end %>
 
 </table>
